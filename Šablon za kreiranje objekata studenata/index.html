@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info</title>
+</head>
+<body>
+
+
+<h1>Student Information</h1>
+
+<div id="student-info"></div>
+
+
+<script>
+    
+    class Student {
+        constructor(name, address, phone, course) {
+            this.name = name;
+            this.address = address;
+            this.phone = phone;
+            this.course = course;
+        }
+
+        getInfo() {
+            return `Name: ${this.name}, Address: ${this.address}, Phone: ${this.phone}, Course: ${this.course}`;
+        }
+    }
+
+    const student1 = new Student("John Benson", "High Park 36", "(507) 833-3567", "Geography");
+    const student2 = new Student("Alice Smith", "Elm Street 20", "(123) 456-7890", "Mathematics");
+    const student3 = new Student("Emma Johnson", "Maple Avenue 15", "(987) 654-3210", "History");
+
+    function displayStudentInfo(student) {
+        const studentInfoDiv = document.getElementById("student-info");
+        const infoParagraph = document.createElement("p");
+        infoParagraph.textContent = student.getInfo();
+        studentInfoDiv.appendChild(infoParagraph);
+    }
+
+    displayStudentInfo(student1);
+    displayStudentInfo(student2);
+    displayStudentInfo(student3);
+
+</script>
+
+
+</body>
+</html>
