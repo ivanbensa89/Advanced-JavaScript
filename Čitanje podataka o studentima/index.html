@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+</head>
+<body>
+
+    <div id="students"></div>
+    <script>
+
+      class Student {
+    constructor(name, address, phone, course) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.course = course;
+    }
+}
+
+async function fetchStudentData() {
+    try {
+        const response = await fetch("https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt");
+        const data = await response.text();
+        
+        const students = parseStudentData(data);
+        displayStudents(students);
+    } catch (error) {
+        console.error("Error fetching student data:", error);
+    }
+}
+
+function parseStudentData(data) {
+    const lines = data.split("\n");
+    const students = [];
+
+    for (let i = 0; i < lines.length; i += 4) {
+        const name = lines[i];
+        const address = lines[i + 1];
+        const phone = lines[i + 2];
+        const course = lines[i + 3];
+        
+        const student = new Student(name, address, phone, course);
+        students.push(student);
+    }
+
+    return students;
+}
+
+function displayStudents(students) {
+    const container = document.getElementById("students");
+    students.forEach(student => {
+        const studentDiv = document.createElement("div");
+        studentDiv.classList.add("student");
+
+        studentDiv.innerHTML = `
+            <p><strong>Name:</strong> ${student.name}</p>
+            <p><strong>Address:</strong> ${student.address}</p>
+            <p><strong>Phone:</strong> ${student.phone}</p>
+            <p><strong>Course:</strong> ${student.course}</p>
+            </br>
+        `;
+        container.appendChild(studentDiv);
+    });
+}
+
+fetchStudentData();
+      
+    </script>
+    
+</body>
+</html>
